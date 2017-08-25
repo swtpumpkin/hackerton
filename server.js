@@ -10,7 +10,7 @@ server.use(middlewares)
 
 server.get('/google', (req, res) => {
   //res.jsonp(req.query)
-  //console.log(res.jsonp(req.query));
+  console.log(res.jsonp(req.query));
   const val1 = '갤럭시노트8';
   const val2 = '아이폰7플러스';
 
