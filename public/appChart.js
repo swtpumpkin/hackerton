@@ -34,7 +34,8 @@ var resultCh2 = document.getElementById("resultChart2");
 /* [ Chart Draw ] */
 
 const horizChart = (scName, scVal) => {
-  
+  //scName.push('max');
+  //scVal.push(100);
   let chart1 = new Chart(resultCh1, {
     type: 'horizontalBar',
     data: {
@@ -45,10 +46,13 @@ const horizChart = (scName, scVal) => {
             data: scVal,
             borderWidth: 1,
             backgroundColor: chartBg1,
-            borderColor: chartBgBrd,
-        }]
+            borderColor: chartBgBrd
+        }],
     },
     options: {
+      animation:{
+        duration: 3000,
+      },
         legend: {
         }
     }
@@ -68,9 +72,13 @@ const doughnutChart = (scName, scVal) => {
             borderWidth: 2,
             backgroundColor: chartBg2,
             borderColor: chartBgBrd,
+            
         }]
     },
     options: {
+      animation:{
+        duration: 3000,
+      },
         legend: {
         }
     }

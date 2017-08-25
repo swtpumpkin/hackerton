@@ -63,7 +63,7 @@ const getGoogleTd = (val) => {
         recommendMsg.innerHTML = '우리가 추천하는 것은 '+result+' 에요~';
 
         // 그래프 출력
-        horizChart(searchTitle, searchData);
+        //horizChart(searchTitle, searchData);
         doughnutChart(searchTitle, searchData);
       }
     }
