@@ -3,11 +3,18 @@ let average = [];
 let search = document.getElementById('input');
 let msg = document.getElementById('message');
 let btn = document.getElementById('inputBtn');
+let recommendMsg = document.getElementById('resultMsg');
 
 let searchTitle; // 검색 문자열
 let searchCnt = 0; // 검색 개수
 let searchData; // 검색 백분율 배열 데이터
-
+// 입력값을 엔터로 실행
+search.addEventListener("keyup", function(event) {
+  event.preventDefault();
+  if (event.keyCode == 13) {
+      document.getElementById("inputBtn").click();
+  }
+});
 // 입력값을 확인하고 조건에 맞으면 다음 함수 실행.
 btn.addEventListener('click', function () {
   //(,)로 구분된 각 단어의 앞뒤 띄어쓰기 삭제 시작.
@@ -52,7 +59,8 @@ const getGoogleTd = (val) => {
           searchData = randomAdd(average);
         }
         //선택 데이터 실행하는 함수.
-        resultMsg();
+        var result = resultMsg();
+        recommendMsg.innerHTML = '우리가 추천하는 것은 '+result+' 에요~';
 
         // 그래프 출력
         horizChart(searchTitle, searchData);
