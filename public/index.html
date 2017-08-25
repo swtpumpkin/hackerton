@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <style>
+    #btnAddBookCle{
+      display: none;
+    }
+    #addBookInput{
+      display: none;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div>
+      <h3>Book List</h3>
+
+      <table id="bookTable" class="table table-striped">
+        <tr class="bookTableHeader">
+          <th><input type="checkbox" id="bookCkAll"></th>
+          <th>#</th>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Price</th>
+        </tr>
+        <tbody id="bookTableBody">
+          
+        </tbody>
+      </table>
+      <input id="btnDelBook" class="btn btn-default" type="button" value="Delete Book">
+      <input id="btnAddBook" class="btn btn-default" type="button" value="Add Book">
+      <input id="btnAddBookCle" class="btn btn-default" type="button" value="Cancle">
+      
+      <div id="addBookInput">
+        <label class="control-label" for="inputId">Title</label>
+        <input id="inputId" class="form-control" type="text" placeholder="Title..">
+        <label class="control-label" for="inputAut">Author</label>
+        <input id="inputAut" class="form-control" type="text" placeholder="Author..">
+        <label class="control-label" for="inputAut">Price</label>
+        <input id="inputPri" class="form-control" type="text" placeholder="Price..">
+      </div>
+    </div>
+  </div>
+   
+  <script>
+    /*------------------------------------*/
+    /* 도서 리스트 출력, 삭제, 입력 구현 */
+    /* NO 통신 >> Ajax통신 컨버전 */
+    let bookList;
+    const req = new XMLHttpRequest();
+    
+    /*------------------------------------*/
+    /* [ 리스트 JONS 리플래시 ] */
+    const bookListLoad = () => {
+      req.open('GET', '/bookList', true);
+      req.send();
+
+      req.onreadystatechange = function() {
+        if(req.readyState === XMLHttpRequest.DONE){
+          if(req.status == 200){
+            bookList = JSON.parse(req.responseText);
+            bookListCall();
+          }
+        }
+      }
+    };
+    
+    /*------------------------------------*/
+    /* [ JSON을 가공 > DOM 입력 ] */
+    const bookListCall = () => {
+      let bookListHtml = '';
+      bookList.map(book => {
+        bookListHtml += `<tr>
+          <td><input type="checkbox" id="${book.id}"></td>
+          <th>${book.id}</th>
+          <td>${book.title}</td>
+          <td>${book.author}</td>
+          <td>${book.price}</td>
+        </tr>`;
+      });
+
+      document.getElementById('bookTableBody').innerHTML = bookListHtml;
+    };
+
+    /*------------------------------------*/
+    /* [ 버튼 add Book ] */
+    document.getElementById('btnAddBook').addEventListener('click', () => {
+      let addBookInputFlg = document.getElementById('addBookInput').style.display;
+      
+      if(!addBookInputFlg || addBookInputFlg == 'none' ){
+        document.getElementById('btnAddBookCle').style.display = 'inline';
+        document.getElementById('addBookInput').style.display = 'block';
+      }else{
+        if(!document.getElementById('inputId').value){
+          alert('title은 필수입니다.');
+          return;
+        }
+
+        let addBook = {};
+        const list = [...document.querySelectorAll('#addBookInput input[type=text]')].map(val => {
+          let bookListCnt = bookList.length < 1 ? 0 : bookList[bookList.length-1].id;
+          
+          addBook.id = Math.max(bookListCnt) + 1;
+          if(val.id == 'inputId'){
+            addBook.title = val.value;
+          }else if(val.id == 'inputAut'){
+            addBook.author = val.value;
+          }else if(val.id == 'inputPri'){
+            addBook.price = val.value;
+          }
+
+          return addBook;
+        })
+
+        req.open('POST', '/bookList', true);
+        req.setRequestHeader('Content-type', 'application/json');
+        req.send(JSON.stringify(addBook));
+        
+        req.onreadystatechange = function() {
+          if(req.readyState === XMLHttpRequest.DONE){
+            if(req.status == 201){
+              console.log(req.responseText);
+              const addBookInput = [...document.querySelectorAll('#addBookInput input[type=text]')].map(val => {
+                val.value = '';
+              });
+              bookListLoad();
+            }
+          }
+        }
+      }
+    })
+
+    /*------------------------------------*/
+    /* [ 버튼 cancle 책입력 가리기 ] */
+    document.getElementById('btnAddBookCle').addEventListener('click', () => {
+      document.getElementById('btnAddBookCle').style.display = 'none';
+      document.getElementById('addBookInput').style.display = 'none';
+    })
+
+    /*------------------------------------*/
+    /* [ 리스트 전체선택 ] */
+    document.getElementById('bookCkAll').addEventListener('click', (e) => {
+      [...document.querySelectorAll('#bookTable td input[type=checkbox]')].map(val => {
+        val.checked = e.target.checked;
+      });
+    });
+
+    /*------------------------------------*/
+    /* [ book 제거 > 체크박스 선택된 항목 ] */
+    document.getElementById('btnDelBook').addEventListener('click', () => {
+      let delBookList = [...document.querySelectorAll('#bookTable td input[type=checkbox]:checked')].map(val => {
+        return parseInt(val.id);
+      });
+      
+      console.log(delBookList);
+      bookList = bookList.filter(val => {
+        return delBookList.indexOf(val.id) < 0;
+      });
+
+      delBookList.map(val => {
+        req.open('DELETE', `/bookList/${val}`, true);
+        req.send();
+
+        req.onreadystatechange = function() {
+          if(req.readyState === XMLHttpRequest.DONE){
+            if(req.status == 200){
+              console.log(req.responseText);
+            }
+          }
+        }
+      });
+
+      bookListCall();
+    });
+
+    /*------------------------------------*/
+    /* [ start ] */
+    bookListLoad();
+  </script>
+</body>
+</html>

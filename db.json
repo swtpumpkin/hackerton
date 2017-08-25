@@ -1,0 +1,47 @@
+{
+  "bookList": [
+    {
+      "id": 1,
+      "title": "HTML5",
+      "author": "Lee",
+      "price": 2000
+    },
+    {
+      "id": 2,
+      "title": "CSS3",
+      "author": "Kim",
+      "price": 3000
+    },
+    {
+      "id": 6,
+      "title": "test",
+      "author": "123",
+      "price": "12345"
+    },
+    {
+      "id": 8,
+      "title": "test1",
+      "author": "auhto",
+      "price": "2000"
+    },
+    {
+      "id": 9,
+      "title": "title",
+      "author": "com",
+      "price": "1000"
+    },
+    {
+      "id": 11,
+      "title": "SASS",
+      "author": "Lim",
+      "price": "9000"
+    },
+    {
+      "id": 12,
+      "title": "set",
+      "author": "set",
+      "price": "setest",
+      "createdAt": 1503592114750
+    }
+  ]
+}
