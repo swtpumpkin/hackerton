@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>애매모호</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="./app.js" defer></script>
 </head>
 <body>
   <div class="container">
@@ -15,22 +16,5 @@
       <input id="inputBtn" class="inputBtn btn btn-success" type="button" value="검색">
     </div>
   </div>
-  <script>
-    var temp;
-    const req = new XMLHttpRequest();
-    let search = "신라면,진라면,너구리라면";
-
-    req.open('GET', '/google?sc='+search, true);
-    req.setRequestHeader('Content-type', 'application/json');
-    req.send();
-    req.onreadystatechange = function() {
-      if(req.readyState === XMLHttpRequest.DONE){
-        if(req.status == 200){
-          console.log(req.responseText);
-          temp = JSON.parse(req.responseText);
-        }
-      }
-    }
-  </script>
 </body>
 </html>
