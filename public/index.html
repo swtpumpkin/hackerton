@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>애매모호</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  
   <style>
     .container{
       width: 80%;
@@ -22,6 +23,8 @@
       font
     }
   </style>
+  <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js"></script>-->
+  <script src="./Chart.min.js"></script>
   <script src="./app.js" defer></script>
 </head>
 <body>
@@ -48,7 +51,7 @@
     </div>
     <!-- 검색 안내 End -->
 
-    <!-- 결과 조회 Start -->
+    <!-- 결론 Start -->
     <div class="resultBox row">
       <div class="col-md-12">
         <p class="bg-success resultContent">
@@ -56,7 +59,52 @@
         </p>
       </div>
     </div>
-    <!-- 결과 조회 End -->
+    <!-- 결론 End -->
+
+    <!-- 결론 상세 Start -->
+    <div class="row">
+        <canvas id="myChart" width="10vw" height="5vw"></canvas>
+    </div>
+    <!-- 결론 상세 End -->
+
   </div>
+  <script>    
+    var ctx = document.getElementById("myChart");
+    var myChart = new Chart(ctx, {
+        type: 'horizontalBar',
+        data: {
+            labels: ["Red", "Blue", "Yellow", "Green"],
+            datasets: [{
+                label: '# sample',
+                data: [12, 19, 3, 5],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            legend: {
+              fontSize: 20
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero:true
+                    }
+                }]
+            }
+        }
+    });
+  </script>
 </body>
 </html>
