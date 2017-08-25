@@ -6,15 +6,57 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>애매모호</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <style>
+    .container{
+      width: 80%;
+    }
+    #inputBtn{
+      width: 100%;
+    }
+    .resultBox{
+      margin-top: 25px;
+      margin-bottom: 25px;
+    }
+    .resultContent{
+      padding: 20px;
+      font
+    }
+  </style>
   <script src="./app.js" defer></script>
 </head>
 <body>
   <div class="container">
-    <div class="searchInput">
-      <h1>애매모호한 선택을 도와드립니다.</h1>
-      <input id="input" class="input form-control" type="search" name="googlesearch">
-      <input id="inputBtn" class="inputBtn btn btn-success" type="button" value="검색">
+    <!-- 검색창 Start -->
+    <div class="row">
+      <div class="col-md-12 searchInput">
+        <h1>애매모호한 선택을 도와드립니다.</h1>
+        <div class="row">
+          <div class="col-md-9">
+            <input id="input" class="input form-control" type="search" name="googlesearch">
+          </div>
+          <div class="col-md-3">
+            <input id="inputBtn" class="inputBtn btn btn-success" type="button" value="검색">
+          </div>
+        </div>
+      </div>
     </div>
+    <!-- 검색창 End -->
+
+    <!-- 검색 안내문구 Start -->
+    <div class="searchInfo">
+      <em id="message"></em>
+    </div>
+    <!-- 검색 안내 End -->
+
+    <!-- 결과 조회 Start -->
+    <div class="resultBox row">
+      <div class="col-md-12">
+        <p class="bg-success resultContent">
+          결정
+        </p>
+      </div>
+    </div>
+    <!-- 결과 조회 End -->
   </div>
 </body>
 </html>
