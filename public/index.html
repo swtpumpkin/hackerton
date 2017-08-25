@@ -64,8 +64,7 @@
       req.onreadystatechange = function() {
         if(req.readyState === XMLHttpRequest.DONE){
           if(req.status == 200){
-            bookList = JSON.parse(req.responseText);
-            bookListCall();
+            console.log(req.responseText);
           }
         }
       }
