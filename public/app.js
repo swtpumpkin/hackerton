@@ -8,6 +8,7 @@ let recommendMsg = document.getElementById('resultMsg');
 let searchTitle; // 검색 문자열
 let searchCnt = 0; // 검색 개수
 let searchData; // 검색 백분율 배열 데이터
+let searchBase; // 검색 기초데이터
 // 입력값을 엔터로 실행
 search.addEventListener("keypress", function(event) {
   //event.preventDefault();
@@ -41,7 +42,6 @@ btn.addEventListener('click', function () {
     searchTitle = initValue;
     getGoogleTd(initValue);
   }
-  dummyTime.in
   
 });
 
@@ -55,8 +55,8 @@ const getGoogleTd = (val) => {
     if(req.readyState === XMLHttpRequest.DONE){
       if(req.status == 200){
         //console.log(req.responseText);
-        average = JSON.parse(req.responseText);
-        average = average.default.averages;
+        searchBase = JSON.parse(req.responseText);
+        average = searchBase.default.averages;
         //서버에서 받아온 배열의 길이를 탐색한다.
         let getArrLeng = average.length;
         //배열의 길이가 0보다 크면 서버에서 값을 받아왔기때문에 백분율을 구할 함수로 보낸다.
@@ -75,6 +75,14 @@ const getGoogleTd = (val) => {
         //horizChart(searchTitle, searchData);
         giphy();
         doughnutChart(searchTitle, searchData);
+        lineChart(searchBase);
+
+        // 완료시 검색어 DB기록
+        addSearch = {};
+        addSearch.searchVal = val;
+        req.open('POST', '/search', true);
+        req.setRequestHeader('Content-type', 'application/json');
+        req.send(JSON.stringify(addSearch));
       }
     }
   }

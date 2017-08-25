@@ -35,7 +35,11 @@
     #resultMsg{
       font-size: 18px;
     }
-
+    .vcenter {
+      display: inline-block;
+      vertical-align: middle;
+      float: none;
+    }
   </style>
   <script src="./Chart.min.js"></script>
   <script src="./app.js" defer></script>
@@ -48,7 +52,7 @@
     <!-- 검색창 Start -->
     <div class="row">
       <div class="col-md-12 searchInput">
-        <h1>대신 정해주는 사이트</h1>
+        <h1>무엇이든 대신 정해주는 사이트</h1>
         <div class="row">
           <div class="col-md-9">
             <input id="input" class="input form-control" type="search" name="googlesearch">
@@ -77,7 +81,8 @@
       <div class="resultBox row">
         <div class="col-md-12">
           <p id="resultMsg" class="bg-success resultContent">
-            - 결정하고자 하는 선택지를 입력해주세요.<br>
+            - 선택하고자 하는 선택지를 입력해주세요.<br>
+            - 선택장애자가 만들어서, 장애가 있을수도 있어요(?)<br>
             - 예) 참치김밥, 치즈김밥, 유부초밥
           </p>
         </div>
@@ -90,10 +95,11 @@
           <!--<canvas id="resultChart1" width="10vw" height="8vw"></canvas>-->
           <canvas id="resultChart2" width="10vw" height="8vw"></canvas>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 vcenter">
           <img id="gifImg" src="/gif/1.gif" alt="">
         </div>
       </div>
+      <canvas id="resultChart3" width="10vw" height="4vw"></canvas>
       <!-- 결론 상세 End -->
     </div>
   </div>

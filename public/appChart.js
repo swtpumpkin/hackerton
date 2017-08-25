@@ -29,6 +29,7 @@ const chartBgBrd = [
 
 var resultCh1 = document.getElementById("resultChart1");
 var resultCh2 = document.getElementById("resultChart2");
+var resultCh3 = document.getElementById("resultChart3");
 
 /*------------------------------------*/
 /* [ Chart Draw ] */
@@ -36,7 +37,8 @@ var resultCh2 = document.getElementById("resultChart2");
 const horizChart = (scName, scVal) => {
   //scName.push('max');
   //scVal.push(100);
-  let chart1 = new Chart(resultCh1, {
+  let chart1;
+  chart1 = new Chart(resultCh1, {
     type: 'horizontalBar',
     data: {
         //labels: ["Red", "Blue", "Yellow", "Green"],
@@ -61,7 +63,8 @@ const horizChart = (scName, scVal) => {
 }
 
 const doughnutChart = (scName, scVal) => {
-  let chart2 = new Chart(resultCh2, {
+  let chart2;
+  chart2 = new Chart(resultCh2, {
     type: 'doughnut',
     data: {
         //labels: ["Red", "Blue", "Yellow", "Green"],
@@ -83,6 +86,107 @@ const doughnutChart = (scName, scVal) => {
         }
     }
   });
+}
+
+const lineChart = (base) => {
+  console.log(base);
+  const lineBase = base.default.timelineData;
+  let baseLabel = [];
+  let baseDataset = [];
+  let baseObject = {};
+
+  for(let j = 0; j < 8 ; j++){
+    let x = j + 14;
+    baseLabel.push(lineBase[x].formattedAxisTime);
+  }
+
+  for(let i = 0; i < searchCnt ; i++){
+    console.log('[ searchTitle ] >>', searchTitle );
+    baseObject.label = searchTitle[i];
+    baseObject.backgroundColor = chartBg1[i];
+    baseObject.borderColor = chartBgBrd[i];
+    baseObject.fill = false;
+    baseObject.data = [];
+    for(let j = 0; j < 8 ; j++){
+      let x = j + 14;
+      baseObject.data.push(lineBase[x].value[i]);
+    }
+
+    baseDataset.push(baseObject);
+    baseObject = {};
+  }
+
+  console.log('[ baseLabel ] >>', baseLabel );
+  console.log('[ baseDataset ] >>', baseDataset );
+  let config = {
+      type: 'line',
+      data: {
+          labels: baseLabel,
+          datasets: baseDataset
+          /*[{
+              label: "My First dataset",
+              backgroundColor: chartBg1[0],
+              borderColor: chartBgBrd[0],
+              data: [
+                  randomScalingFactor(),
+                  randomScalingFactor(),
+                  randomScalingFactor(),
+                  randomScalingFactor(),
+                  randomScalingFactor(),
+                  randomScalingFactor(),
+                  randomScalingFactor()
+              ],
+              fill: false,
+          }, {
+              label: "My Second dataset",
+              fill: false,
+              backgroundColor: chartBg1[0],
+              borderColor: chartBgBrd[0],
+              data: [
+                  randomScalingFactor(),
+                  randomScalingFactor(),
+                  randomScalingFactor(),
+                  randomScalingFactor(),
+                  randomScalingFactor(),
+                  randomScalingFactor(),
+                  randomScalingFactor()
+              ],
+          }]*/
+      },
+      options: {
+          responsive: true,
+          title:{
+              display:true,
+              text:'Google 트랜드 현황'
+          },
+          tooltips: {
+              mode: 'index',
+              intersect: false,
+          },
+          hover: {
+              mode: 'nearest',
+              intersect: true
+          },
+          scales: {
+              xAxes: [{
+                  display: true,
+                  scaleLabel: {
+                      display: true,
+                      labelString: 'Month'
+                  }
+              }],
+              yAxes: [{
+                  display: true,
+                  scaleLabel: {
+                      display: true,
+                      labelString: 'Value'
+                  }
+              }]
+          }
+      }
+  };
+  let chart3;
+  chart3 = new Chart(resultCh3, config);
 }
 
 /* 예제 */
