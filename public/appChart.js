@@ -34,6 +34,7 @@ var resultCh2 = document.getElementById("resultChart2");
 /* [ Chart Draw ] */
 
 const horizChart = (scName, scVal) => {
+  
   let chart1 = new Chart(resultCh1, {
     type: 'horizontalBar',
     data: {
@@ -52,6 +53,7 @@ const horizChart = (scName, scVal) => {
         }
     }
   });
+  console.log(chart1);
 }
 
 const doughnutChart = (scName, scVal) => {
@@ -76,6 +78,7 @@ const doughnutChart = (scName, scVal) => {
 }
 
 /* 예제 */
+/*
 horizChart(
   ["Red", "Blue", "Yellow", "Green"],
   [12, 19, 3, 5]
@@ -85,3 +88,4 @@ doughnutChart(
   ["Red", "Blue", "Yellow", "Green"],
   [12, 19, 3, 5]
 );
+*/

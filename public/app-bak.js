@@ -6,7 +6,14 @@ let btn = document.getElementById('inputBtn');
 
 let searchTitle; // 검색 문자열
 let searchCnt = 0; // 검색 개수
-let searchData; // 검색 백분율 배열 데이터
+let searchData; // 검색 데이터
+
+
+// 결과 메세지 출력
+let resultMsg = () => {
+
+  // '~~' 가 선택되었습니다.
+}
 
 // 입력값을 확인하고 조건에 맞으면 다음 함수 실행.
 btn.addEventListener('click', function () {
@@ -47,16 +54,11 @@ const getGoogleTd = (val) => {
         //배열의 길이가 0보다 크면 서버에서 값을 받아왔기때문에 백분율을 구할 함수로 보낸다.
         if(getArrLeng>0){
           searchData = divPercent(average);
-          //배열의 길이가 0이면 배열의 값을 받아오지 못했으므로 랜덤값을 입력하는 함수로 보낸다.
+        //배열의 길이가 0이면 배열의 값을 받아오지 못했으므로 랜덤값을 입력하는 함수로 보낸다.
         }else if(getArrLeng === 0){
           searchData = randomAdd(average);
         }
-        //선택 데이터 실행하는 함수.
-        resultMsg();
 
-        // 그래프 출력
-        horizChart(searchTitle, searchData);
-        doughnutChart(searchTitle, searchData);
       }
     }
   }
@@ -85,16 +87,4 @@ const divPercent  = (average) => {
   //elemPercent에 배열의 형태로 백분율 된 값이 담김.
   //console.log(elemPercent);
   return elemPercent;
-}
-// 결과 메세지 출력
-let resultMsg = () => {
-  let maxValue = 0;
-  for(let num = 0; num < searchCnt; num ++){
-    if(searchData[num]>maxValue){
-      maxValue = searchData[num];
-    }
-  }
-  console.log(searchData);
-  return searchTitle[searchData.indexOf(maxValue)];
-  // '~~' 가 선택되었습니다.
 }
