@@ -64,6 +64,7 @@ const getGoogleTd = (val) => {
 
         // 그래프 출력
         //horizChart(searchTitle, searchData);
+        giphy();
         doughnutChart(searchTitle, searchData);
       }
     }
@@ -105,4 +106,11 @@ let resultMsg = () => {
   console.log(searchData);
   return searchTitle[searchData.indexOf(maxValue)];
   // '~~' 가 선택되었습니다.
+}
+// gif img 담기
+const giphy = () =>{
+  console.log('giphy');
+  let gifFile = document.getElementById('gifImg')
+  let ranNum = Math.floor((Math.random() * 5) + 1);
+  gifFile.src = "/gif/"+ranNum+".gif"
 }
