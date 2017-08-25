@@ -4,50 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <title>애매모호</title>
   <style>
-    #btnAddBookCle{
-      display: none;
-    }
-    #addBookInput{
-      display: none;
-    }
+    .container{
 
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <div>
-      <h3>Book List</h3>
-
-      <table id="bookTable" class="table table-striped">
-        <tr class="bookTableHeader">
-          <th><input type="checkbox" id="bookCkAll"></th>
-          <th>#</th>
-          <th>Title</th>
-          <th>Author</th>
-          <th>Price</th>
-        </tr>
-        <tbody id="bookTableBody">
-          
-        </tbody>
-      </table>
-      <input id="btnDelBook" class="btn btn-default" type="button" value="Delete Book">
-      <input id="btnAddBook" class="btn btn-default" type="button" value="Add Book">
-      <input id="btnAddBookCle" class="btn btn-default" type="button" value="Cancle">
-      
-      <div id="addBookInput">
-        <label class="control-label" for="inputId">Title</label>
-        <input id="inputId" class="form-control" type="text" placeholder="Title..">
-        <label class="control-label" for="inputAut">Author</label>
-        <input id="inputAut" class="form-control" type="text" placeholder="Author..">
-        <label class="control-label" for="inputAut">Price</label>
-        <input id="inputPri" class="form-control" type="text" placeholder="Price..">
-      </div>
+    <div class="searchInput">
+      <h1>애매모호한 선택을 도와드립니다.</h1>
+      <input id="input" class="input" type="search" name="googlesearch">
+      <input id="inputBtn" class="inputBtn" type="button" value="검색">
     </div>
   </div>
-   
+  
   <script>
     /*------------------------------------*/
     /* 도서 리스트 출력, 삭제, 입력 구현 */
@@ -182,5 +154,6 @@
     /* [ start ] */
     bookListLoad();
   </script>
+
 </body>
 </html>
