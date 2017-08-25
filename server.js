@@ -9,14 +9,14 @@ server.use(middlewares)
 // google : 트랜드 결과 가져오기
 
 server.get('/google', (req, res) => {
-  //res.jsonp(req.query)
-  console.log(res.jsonp(req.query));
-  const val1 = '갤럭시노트8';
-  const val2 = '아이폰7플러스';
+  //console.log(' 결과 ', req.query.sc);
+  
+  let search = req.query.sc.split(',');
+  console.log(search);
 
   const googleTrends = require('google-trends-api');
   
-  googleTrends.interestOverTime({keyword: [val1, val2], startTime: new Date('2017-08-01'), geo: "KR" ,  })
+  googleTrends.interestOverTime({keyword: search, startTime: new Date('2017-08-01'), geo: "KR" ,  })
   .then(function(results){
     //console.log(results);
     res.json(JSON.parse(results));
