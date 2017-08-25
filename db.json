@@ -35,13 +35,6 @@
       "title": "SASS",
       "author": "Lim",
       "price": "9000"
-    },
-    {
-      "id": 12,
-      "title": "set",
-      "author": "set",
-      "price": "setest",
-      "createdAt": 1503592114750
     }
   ]
 }
