@@ -19,5 +19,22 @@
       <input id="inputBtn" class="inputBtn" type="button" value="검색">
     </div>
   </div>
+
+  <script>
+    var temp;
+    const req = new XMLHttpRequest();
+
+    req.open('GET', '/google', true);
+    req.send();
+
+    req.onreadystatechange = function() {
+      if(req.readyState === XMLHttpRequest.DONE){
+        if(req.status == 200){
+          console.log(req.responseText);
+          temp = JSON.parse(req.responseText);
+        }
+      }
+    }
+  </script>
 </body>
 </html>
