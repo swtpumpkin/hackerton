@@ -9,8 +9,8 @@ let searchTitle; // 검색 문자열
 let searchCnt = 0; // 검색 개수
 let searchData; // 검색 백분율 배열 데이터
 // 입력값을 엔터로 실행
-search.addEventListener("keypress", function(event) {
-  //event.preventDefault();
+search.addEventListener("keyup", function(event) {
+  event.preventDefault();
   if (event.keyCode == 13) {
       document.getElementById("inputBtn").click();
   }
@@ -19,7 +19,6 @@ search.addEventListener("keypress", function(event) {
 btn.addEventListener('click', function () {
   //(,)로 구분된 각 단어의 앞뒤 띄어쓰기 삭제 시작.
   let initValue=[];
- 
   //map 프로퍼티로 각 요소마다 순회하고 trim프로퍼티를 이용하여 띄어쓰기 제거
   search.value.split(',').map(search => {
     search = search.trim();
@@ -30,23 +29,16 @@ btn.addEventListener('click', function () {
   if(initValue.length <= 1){
     msg.innerHTML = '두가지 이상을 입력해주세요';
   } else {
-    document.getElementById("loadingImg").style.display = "inline";
-    document.getElementById("contents").style.display = "none";
-    
-    dummyTime = setTimeout("document.getElementById('loadingImg').style.display = 'none';document.getElementById('contents').style.display = '';", 3000);
-  
     // 초기 입력값의 배열의 길이를 설정하는 변수를 할당.
     searchCnt = initValue.length;
+    console.log(searchCnt);
     //각 조건에 맞으면 다음 함수를 실행하는 함수를 작성.
     searchTitle = initValue;
     getGoogleTd(initValue);
   }
-  dummyTime.in
-  
 });
 
 const getGoogleTd = (val) => {
-  
   const req = new XMLHttpRequest();
   req.open('GET', '/google?sc='+val, true);
   req.setRequestHeader('Content-type', 'application/json');
@@ -68,9 +60,8 @@ const getGoogleTd = (val) => {
         }
         //선택 데이터 실행하는 함수.
         var result = resultMsg();
-        recommendMsg.innerHTML = '우리가 추천하는 것은 \'<span style="font-weight: bold;"> '+result+ ' </span>\' 에요~';
+        recommendMsg.innerHTML = '우리가 추천하는 것은 '+result+' 에요~';
 
-        msg.innerHTML = "";
         // 그래프 출력
         //horizChart(searchTitle, searchData);
         giphy();
@@ -116,12 +107,10 @@ let resultMsg = () => {
   return searchTitle[searchData.indexOf(maxValue)];
   // '~~' 가 선택되었습니다.
 }
-
 // gif img 담기
 const giphy = () =>{
   console.log('giphy');
   let gifFile = document.getElementById('gifImg')
   let ranNum = Math.floor((Math.random() * 5) + 1);
   gifFile.src = "/gif/"+ranNum+".gif"
-  gifFile.style.display = "inline";
 }

@@ -77,7 +77,7 @@ const doughnutChart = (scName, scVal) => {
     },
     options: {
       animation:{
-        duration: 3000,
+        duration: 2900,
       },
         legend: {
         }
